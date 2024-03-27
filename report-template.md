@@ -2,26 +2,42 @@
 
 ## Overview of the Analysis
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+Lending institutions provide loans or assets to borrowers with the anticipation that the borrower will either return the asset or repay the loan. Credit Risk arises when a borrower fails to return the asset or fulfill the loan repayment, resulting in financial losses for the lender. Lenders assess this risk through various methods, but in this study, we will employ Machine Learning to examine a dataset of past lending transactions from a peer-to-peer lending platform. The objective is to develop a model that can assess the creditworthiness of borrowers.
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any other algorithms).
+I used a machine learning model to determine if loans are safe (low-risk) or risky (high-risk) based on the loan status provided by the lending company.
+
+After analyzing the lending company's dataset, I developed a Logistic Regression Model that achieved an impressive accuracy score of 99%. However, when it comes to distinguishing non-healthy loans, the model's recall value is lower (0.91) compared to its recall value for healthy loans (0.99). This suggests that the model performs better at predicting loan status as healthy rather than identifying loan status as non-healthy. The reason behind this discrepancy lies in the dataset's imbalance, where the majority of the data corresponds to one class label (in this case, healthy loans greatly outnumber non-healthy loans).
 
 ## Results
 
-Using bulleted lists, describe the accuracy scores and the precision and recall scores of all machine learning models.
+Machine Learning Model 1:
+* Description of Model 1 Accuracy, Precision, and Recall scores.
+* In comparison to the original dataset, similarly the number of healthy loans is greater than the number of unhealthy loans.
+* The model has a good accuracy model of 99%, the precision score for 0 (healthy loans) is 100% and the precision for 1 labels is not bad at 85%.
+* The recall score is also quite high at 99% for prediction of 0 labels and 91% for high-risk loans with the label 1.
 
-* Machine Learning Model 1:
-    * Description of Model 1 Accuracy, Precision, and Recall scores.
+
+Machine Learning Model 2:
+* Description of Model 2 Accuracy, Precision, and Recall scores.
+* The accuracy score for this model is also quite high at 99%. Looking at the confusion matrix, the oversampled data model did significantly better at predicting false negatives, meaning * only 4 loans of 0 type were identified as false negative.
+* Similar to the previous model, the precision score for 0 loans was 100% and 84% for loan type 1.
+* The recall score improved for high-risk loans compared to the previous model.
 
 ## Summary
+A lending company wants a model that accurately distinguishes between healthy and non-healthy loans to minimize potential costs. Misclassifying healthy loans as non-healthy can lead to customer loss, while misclassifying non-healthy loans as healthy can result in financial losses for the company.
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
+The Logistic Regression model trained with oversampled data performed better than the model trained with imbalanced data. The balanced dataset approach improved accuracy and recall, reducing errors in classifying non-healthy loans.
 
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+To minimize risks, the lending company prefers fewer false positives, where non-healthy loans are mistakenly classified as healthy. Looking at the confusion matrices:
 
-If you do not recommend any of the models, please justify your reasoning.
+Machine Learning Model 1 with imbalanced data:
+
+* 56 false positives (actual value: healthy, predicted value: non-healthy)
+* 102 false negatives (actual value: non-healthy, predicted value: healthy)
+
+  Machine Learning Model 2 with balanced data:
+
+* 4 false positives (actual value: healthy, predicted value: non-healthy)
+* 116 false negatives (actual value: non-healthy, predicted value: healthy)
+
+   Based on these results, the model with balanced data is recommended as it significantly reduces false positives and improves accuracy in classifying healthy and non-healthy loans.
